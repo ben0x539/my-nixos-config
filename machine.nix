@@ -23,7 +23,8 @@
 
   systemd.services.zfs-mount.requiredBy = [ "local-fs.target" ];
 
-  swapDevices = [ { device = "/dev/zvol/vigil/swap"; } ];
+  # // might make it not wait for the swap device to come up?
+  swapDevices = [ { device = "//dev/zvol/vigil/swap"; } ];
 
   fileSystems = {
     "/" = {
@@ -34,6 +35,7 @@
         blkDev = "/dev/disk/by-id/ata-Samsung_SSD_850_EVO_1TB_S2RFNX0H612580Z-part6";
         label = "vigil-luks";
       };
+        label = "vigil-luks";
     };
 
     "/boot" = {
@@ -41,11 +43,11 @@
         fsType = "ext2";
       };
 
-    "/home/ben/win7" = {
-      device = "/dev/disk/by-uuid/98CA864ACA86251A";
-      fsType = "ntfs-3g";
-      options = [ "nofail" "noauto" ];
-    };
+    # "/home/ben/win7" = {
+    #   device = "/dev/disk/by-uuid/98CA864ACA86251A";
+    #   fsType = "ntfs-3g";
+    #   options = [ "nofail" "noauto" ];
+    # };
   };
 
   # iwlwifi firmware

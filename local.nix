@@ -13,5 +13,15 @@
       uid = 1000;
       extraGroups = [ "wheel" ];
     };
+    dropoff = {
+      createHome = false;
+      isNormalUser = true;
+    };
+    vh = {
+      createHome = false;
+      isNormalUser = true;
+      uid = 1001;
+      extraGroups = [ "wheel" ];
+    };
   };
 }

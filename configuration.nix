@@ -52,7 +52,11 @@
   };
 
   services = {
-    openssh.enable = true;
+    redis.enable = true;
+    openssh = {
+      enable = true;
+      forwardX11 = true;
+    };
     printing = {
       enable = true;
       drivers = [ pkgs.gutenprint ];
@@ -60,12 +64,32 @@
 
     #WARNING: Error retrieving accessibility bus address: org.freedesktop.DBus.Error.ServiceUnknown: The name org.a11y.Bus was not provided by any .service files
     gnome3.at-spi2-core.enable = true;
+
+    kbfs.enable = true;
   };
 
   nix = {
     useSandbox = true;
     maxJobs = 8;
+    #distributedBuilds = true;
+    #buildMachines = [
+    #  {
+    #    hostName = "51.15.50.214";
+    #    sshUser = "nix_remote";
+    #    sshKey = "/root/.ssh/id_nix_remote_build";
+    #    system = "x86_64-linux";
+    #    maxJobs = 8;
+    #  }
+    #  {
+    #    hostName = "51.15.50.214";
+    #    sshUser = "nix_remote";
+    #    sshKey = "/root/.ssh/id_nix_remote_build";
+    #    system = "i686-linux";
+    #    maxJobs = 8;
+    #  }
+    #];
   };
+
   nixpkgs.config.allowUnfree = true;
 
   powerManagement.cpuFreqGovernor = "powersave";
@@ -76,10 +100,27 @@
     libvirtd.enable = true;
   };
 
-  hardware.pulseaudio.enable = true;
-  hardware.pulseaudio.support32Bit = true;
+  hardware.pulseaudio = {
+    enable = true;
+    support32Bit = true;
+    extraConfig = ''
+        load-module module-echo-cancel aec_method=webrtc use_volume_sharing=false
+        load-module module-combine-sink sink_name=tee sink_properties=device.description="Tee"
+      '';
+    # without this, loading module-echo-cancel crashes the daemon
+    daemon.config.flat-volumes = "no";
+  };
 
-  programs.adb.enable = true; # this has a daemon i guess
+  programs = {
+    adb.enable = true; # this has a daemon i guess
+    ssh = {
+      startAgent = true;
+      knownHosts = [{
+        hostNames = [ "51.15.50.214" ];
+        publicKeyFile = ./remote_build_host_key.pub;
+      }];
+    };
+  };
 
   users.users = map (user: {
     name = user;
