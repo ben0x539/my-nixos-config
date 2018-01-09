@@ -102,15 +102,19 @@
     libvirtd.enable = true;
   };
 
-  hardware.pulseaudio = {
-    enable = true;
-    support32Bit = true;
-    extraConfig = ''
-        load-module module-echo-cancel aec_method=webrtc use_volume_sharing=false
-        load-module module-combine-sink sink_name=tee sink_properties=device.description="Tee"
-      '';
-    # without this, loading module-echo-cancel crashes the daemon
-    daemon.config.flat-volumes = "no";
+  hardware = {
+    pulseaudio = {
+      enable = true;
+      package = pkgs.pulseaudioFull;
+      support32Bit = true;
+      extraConfig = ''
+          load-module module-echo-cancel aec_method=webrtc use_volume_sharing=false
+          load-module module-combine-sink sink_name=tee sink_properties=device.description="Tee"
+        '';
+      # without this, loading module-echo-cancel crashes the daemon
+      daemon.config.flat-volumes = "no";
+    };
+    bluetooth.enable = true;
   };
 
   programs = {
