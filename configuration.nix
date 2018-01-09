@@ -20,6 +20,8 @@
 
     # systemPackages
     ./pkgs.nix
+
+    ./metrics.nix
   ];
 
   boot.kernelPackages = pkgs.linuxPackages_latest;
