@@ -1,3 +1,4 @@
+{ pkgs, ... }:
 {
   services = {
     prometheus = {
@@ -25,5 +26,10 @@
       enable = true;
       analytics.reporting.enable = false;
     };
+  };
+
+  systemd.services.laptop-stats = {
+    script = "${pkgs.laptop-stats}/bin/laptop_stats";
+    wantedBy = [ "multi-user.target" ];
   };
 }

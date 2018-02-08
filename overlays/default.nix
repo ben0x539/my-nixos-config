@@ -5,6 +5,7 @@ let
   overlay = self: super: {
     pmount = addPatch super.pmount ./pmount-exfat.patch;
     prometheus = self.callPackage ./prometheus.nix {};
+    laptop-stats = self.callPackage ./laptop-stats.nix {};
   };
 
 in { ... }: {
