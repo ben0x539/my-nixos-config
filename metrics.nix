@@ -31,8 +31,9 @@
     };
   };
 
+  environment.systemPackages = [ pkgs.laptop-stats ];
   systemd.services.laptop-stats = {
-    script = "${pkgs.laptop-stats}/bin/laptop_stats";
+    script = "${pkgs.laptop-stats}/bin/laptop-stats";
     wantedBy = [ "multi-user.target" ];
   };
 }
