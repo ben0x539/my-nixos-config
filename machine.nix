@@ -54,10 +54,12 @@
   hardware.firmware = with pkgs; [ firmwareLinuxNonfree ];
 
   # don't suspend on lid close, don't shutdown on power key
-  services.logind.extraConfig = ''
-    HandleLidSwitch=ignore
-    HandlePowerKey=suspend
-  '';
+  services.logind = {
+    lidSwitch = "ignore";
+    extraConfig = ''
+      HandlePowerKey=suspend
+    '';
+  };
 
   # X: proprietary nvidia drivers
   services.xserver = {
