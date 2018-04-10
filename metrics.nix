@@ -18,7 +18,10 @@
         {
           job_name = "vigil";
           scrape_interval = "5s";
-          static_configs = [ { targets = [ "localhost:24042" ]; } ];
+          static_configs = [
+            { targets = [ "localhost:24042" ]; }
+            { targets = [ "localhost:9100" ]; }
+          ];
         }
       ];
     };
