@@ -56,7 +56,6 @@
   };
 
   services = {
-    redis.enable = true;
     openssh = {
       enable = true;
       forwardX11 = true;
