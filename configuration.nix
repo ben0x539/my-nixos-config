@@ -79,7 +79,7 @@
 
   nix = {
     useSandbox = true;
-    maxJobs = 8;
+    maxJobs = 2;
     #distributedBuilds = true;
     #buildMachines = [
     #  {
