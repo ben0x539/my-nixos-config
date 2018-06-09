@@ -21,6 +21,8 @@
     # systemPackages
     ./pkgs.nix
 
+    #./wireguard.nix
+
     ./metrics.nix
   ];
 
