@@ -66,6 +66,10 @@
       enable = true;
       drivers = [ pkgs.gutenprint ];
     };
+    avahi = {
+      enable = true;
+      nssmdns = true;
+    };
 
     #WARNING: Error retrieving accessibility bus address: org.freedesktop.DBus.Error.ServiceUnknown: The name org.a11y.Bus was not provided by any .service files
     gnome3.at-spi2-core.enable = true;
