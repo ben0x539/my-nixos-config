@@ -13,7 +13,7 @@ let
     ];
   };
   rustNightly = pkgs.rustChannelOf {
-    date = "2018-01-09";
+    date = "2018-06-01";
     channel = "nightly";
   };
 
@@ -24,8 +24,8 @@ let
   laptop-stats-src = pkgs.fetchFromGitHub {
     owner = "ben0x539";
     repo = "laptop-stats";
-    rev = "9c5744134936cacd2da22dd53b723bb3656214c5";
-    sha256 = "1vkw9svygmdjb1jkg25538b83s57lzplisxnf72c1nghp22iz7bw";
+    rev = "1b4267d7df700eae2ff0d5308966a01fc734fc56";
+    sha256 = "0r6vjd9phl6frf3qcz67bmfzsm53ln38lfc7z23ch7gv6zdmzvvg";
   };
 
   crates = pkgs.callPackage "${laptop-stats-src}/crates.nix" {
