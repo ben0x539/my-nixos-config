@@ -3,7 +3,7 @@
   services = {
     prometheus = {
       enable = true;
-      nodeExporter.enable = true;
+      exporters.node.enable = true;
       extraFlags = [ "-storage.local.retention=87600h" ];
       scrapeConfigs = [
         {
