@@ -24,11 +24,11 @@ let
   laptop-stats-src = pkgs.fetchFromGitHub {
     owner = "ben0x539";
     repo = "laptop-stats";
-    rev = "1b4267d7df700eae2ff0d5308966a01fc734fc56";
-    sha256 = "0r6vjd9phl6frf3qcz67bmfzsm53ln38lfc7z23ch7gv6zdmzvvg";
+    rev = "3cf79df44e825a85112c56e84735f209878f6502";
+    sha256 = "02k36q91447p0fgy9fkqbkycs86c2highps8drdc1fkwzx2nhk8r";
   };
 
-  crates = pkgs.callPackage "${laptop-stats-src}/crates.nix" {
+  crates = pkgs.callPackage "${laptop-stats-src}/Cargo.nix" {
     inherit buildRustCrate;
   };
 
