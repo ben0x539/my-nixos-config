@@ -111,6 +111,8 @@
     libvirtd.enable = true;
   };
 
+  services.dockerRegistry.enable = true;
+
   hardware = {
     pulseaudio = {
       enable = true;
