@@ -104,7 +104,10 @@
   powerManagement.cpuFreqGovernor = "powersave";
 
   virtualisation = {
-    docker.enable = true;
+    docker = {
+      enable = true;
+      storageDriver = "zfs";
+    };
     libvirtd.enable = true;
   };
 
