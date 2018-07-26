@@ -26,8 +26,6 @@
     ./metrics.nix
   ];
 
-  boot.kernelPackages = pkgs.linuxPackages_4_14;
-
   networking = {
     networkmanager.enable = true;
     #firewall.enable = false;
