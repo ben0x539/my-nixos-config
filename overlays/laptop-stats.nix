@@ -17,7 +17,7 @@ let
     channel = "nightly";
   };
 
-  buildRustCrate = pkgs.callPackage <nixpkgs/pkgs/build-support/rust/build-rust-crate.nix> {
+  buildRustCrate = pkgs.callPackage <nixpkgs/pkgs/build-support/rust/build-rust-crate> {
     rustc = rustNightly.rust;
   };
 
