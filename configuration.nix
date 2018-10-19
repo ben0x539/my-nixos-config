@@ -109,7 +109,8 @@
     libvirtd.enable = true;
   };
 
-  services.dockerRegistry.enable = true;
+  # broken by #43857
+  #services.dockerRegistry.enable = true;
 
   hardware = {
     pulseaudio = {
