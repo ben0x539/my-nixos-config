@@ -63,15 +63,15 @@
 
   hardware.bumblebee.enable = true;
   # X: proprietary nvidia drivers
-  #services.xserver = {
-  #  videoDrivers = [ "nvidia" ];
-  #  deviceSection = ''
-  #    Option "NoLogo" "TRUE"
-  #    Option "ModeValidation" "DFP-1: AllowNonEdidModes"
-  #  '';
+  services.xserver = {
+    videoDrivers = [ "nvidia" ];
+    deviceSection = ''
+      Option "NoLogo" "TRUE"
+      Option "ModeValidation" "DFP-1: AllowNonEdidModes"
+    '';
 
-  #  dpi = 72;
-  #};
+    dpi = 72;
+  };
   hardware.opengl.driSupport32Bit = true;
   fonts.fontconfig.dpi = 96;
 }
