@@ -4,8 +4,8 @@ let
   mozilla = pkgs'.fetchFromGitHub {
     owner = "mozilla";
     repo = "nixpkgs-mozilla";
-    rev = "661f3f4d8183f493252faaa4e7bf192abcf5d927";
-    sha256 = "0g1ig96a5qzppbf75qwll8jvc7af596ribhymzs4pbws5zh7mp6p";
+    rev = "200cf0640fd8fdff0e1a342db98c9e31e6f13cd7";
+    sha256 = "1am353ims43ylvay263alchzy3y87r1khnwr0x2fp35qr347bvxi";
   };
   pkgs = import <nixpkgs> {
     overlays = [
@@ -13,7 +13,7 @@ let
     ];
   };
   rustNightly = pkgs.rustChannelOf {
-    date = "2018-06-01";
+    date = "2019-07-04";
     channel = "nightly";
   };
 
@@ -24,14 +24,16 @@ let
   laptop-stats-src = pkgs.fetchFromGitHub {
     owner = "ben0x539";
     repo = "laptop-stats";
-    rev = "3cf79df44e825a85112c56e84735f209878f6502";
-    sha256 = "02k36q91447p0fgy9fkqbkycs86c2highps8drdc1fkwzx2nhk8r";
+    rev = "6fa68139201ef0616698baa7d0b82a039ef1aa05";
+    sha256 = "1r1d6jrj4ar85ymyz95miigqbdf496h7yrc5wx6l32adhqw9qiaf";
   };
 
+  cratesIO = pkgs.callPackage "${laptop-stats-src}/crates-io.nix" {};
+
   crates = pkgs.callPackage "${laptop-stats-src}/Cargo.nix" {
-    inherit buildRustCrate;
+    inherit buildRustCrate cratesIO;
   };
 
 in
 
-crates.laptop_stats_0_1_0 {}
+crates.laptop_stats {}
