@@ -76,23 +76,6 @@
   nix = {
     useSandbox = true;
     maxJobs = 2;
-    #distributedBuilds = true;
-    #buildMachines = [
-    #  {
-    #    hostName = "51.15.50.214";
-    #    sshUser = "nix_remote";
-    #    sshKey = "/root/.ssh/id_nix_remote_build";
-    #    system = "x86_64-linux";
-    #    maxJobs = 8;
-    #  }
-    #  {
-    #    hostName = "51.15.50.214";
-    #    sshUser = "nix_remote";
-    #    sshKey = "/root/.ssh/id_nix_remote_build";
-    #    system = "i686-linux";
-    #    maxJobs = 8;
-    #  }
-    #];
   };
 
   nixpkgs.config.allowUnfree = true;
@@ -129,13 +112,7 @@
 
   programs = {
     adb.enable = true; # this has a daemon i guess # 'android_sdk.accept_license = true;'
-    ssh = {
-      startAgent = true;
-      knownHosts = [{
-        hostNames = [ "51.15.50.214" ];
-        publicKeyFile = ./remote_build_host_key.pub;
-      }];
-    };
+    ssh.startAgent = true;
     gnupg.agent.enable = true;
   };
 
