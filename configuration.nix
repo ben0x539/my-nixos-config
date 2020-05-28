@@ -46,7 +46,11 @@
 
   environment = {
     etc = {
-      nixos-orig.source = ./.;
+      nixos-orig.source = let x = builtins.filterSource (path: _type:
+        builtins.trace (baseNameOf path)
+        (baseNameOf path != ".git")
+      ) ./.;
+      in builtins.trace x x;
     };
     variables = {
       EDITOR = "vim";
