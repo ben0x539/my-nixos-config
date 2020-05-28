@@ -37,7 +37,7 @@
   console.keyMap = "us";
 
   time = {
-    timeZone = "Europe/Berlin";
+    timeZone = "America/Los_Angeles";
     hardwareClockInLocalTime = true;
   };
 
