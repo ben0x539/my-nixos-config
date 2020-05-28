@@ -22,8 +22,6 @@
     ./pkgs.nix
 
     #./wireguard.nix
-
-    ./metrics.nix
   ];
 
   networking = {
