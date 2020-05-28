@@ -19,6 +19,7 @@
       availableKernelModules = [ "ehci_pci" "ahci" "xhci_pci" "firewire_ohci" "usb_storage" "usbhid" "sd_mod" "sr_mod" "sdhci_pci" ];
     };
     kernelModules = [ "kvm-intel" ];
+    blacklistedKernelModules = [ "i915" "intel_agp" ];
   };
 
   systemd.services.zfs-mount.requiredBy = [ "local-fs.target" ];
@@ -35,7 +36,7 @@
         blkDev = "/dev/disk/by-id/ata-Samsung_SSD_850_EVO_1TB_S2RFNX0H612580Z-part6";
         label = "vigil-luks";
       };
-        label = "vigil-luks";
+      label = "vigil-luks";
     };
 
     "/boot" = {
@@ -61,17 +62,18 @@
     '';
   };
 
-  hardware.bumblebee.enable = true;
+  #hardware.bumblebee.enable = true;
   # X: proprietary nvidia drivers
   services.xserver = {
-    videoDrivers = [ "nvidia" ];
+    videoDrivers = [ "nvidia" ]; # [ "nvidiaLegacy390" ];
     deviceSection = ''
       Option "NoLogo" "TRUE"
-      Option "ModeValidation" "DFP-1: AllowNonEdidModes"
+      # Option "ModeValidation" "DFP-1: AllowNonEdidModes"
     '';
 
     dpi = 72;
   };
   hardware.opengl.driSupport32Bit = true;
+  hardware.pulseaudio.support32Bit = true;
   fonts.fontconfig.dpi = 96;
 }

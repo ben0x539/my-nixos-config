@@ -12,9 +12,10 @@
       accelFactor = "0.001";
     };
 
+    displayManager.defaultSession = "none+openbox";
     windowManager = {
       openbox.enable = true;
-      default = "openbox";
+    #  default = "none+openbox";
     };
 
     desktopManager.xterm.enable = false;

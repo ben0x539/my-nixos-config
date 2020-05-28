@@ -32,9 +32,9 @@
   };
 
   i18n = {
-    consoleKeyMap = "us";
     defaultLocale = "en_US.UTF-8";
   };
+  console.keyMap = "us";
 
   time = {
     timeZone = "Europe/Berlin";
@@ -130,7 +130,7 @@
   };
 
   programs = {
-    adb.enable = true; # this has a daemon i guess
+    adb.enable = true; # this has a daemon i guess # 'android_sdk.accept_license = true;'
     ssh = {
       startAgent = true;
       knownHosts = [{
@@ -138,13 +138,16 @@
         publicKeyFile = ./remote_build_host_key.pub;
       }];
     };
+    gnupg.agent.enable = true;
   };
 
-  users.users = map (user: {
+  users.users = builtins.listToAttrs (map (user: {
     name = user;
-    extraGroups = [
-      "adbusers"
-      "networkmanager"
-    ];
-  }) config.adHoc.localUsers;
+    value = {
+      extraGroups = [
+        "adbusers"
+        "networkmanager"
+      ];
+    };
+  }) config.adHoc.localUsers);
 }
