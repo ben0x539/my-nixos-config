@@ -6,6 +6,16 @@
 
   adHoc.localUsers = [ "ben" ]; # a bit lonely in here
 
+  security.pam.loginLimits = [
+    {
+      domain = "ben";
+      type = "-";
+      item = "memlock";
+      value = 128 * 1024;
+
+    }
+  ];
+
   users.users = {
     ben = {
       createHome = false;
