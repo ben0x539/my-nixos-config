@@ -10,15 +10,19 @@
 
       device = "/dev/sda";
       extraEntries = ''
-        menuentry "Windows 7" {
-          chainloader (hd0,1)+1
+        menuentry "Windows 10" {
+          chainloader (hd1,1)+1
         }
       '';
     };
+
+    kernelParams = [];
+
     initrd = {
       availableKernelModules = [ "ehci_pci" "ahci" "xhci_pci" "firewire_ohci" "usb_storage" "usbhid" "sd_mod" "sr_mod" "sdhci_pci" ];
     };
     kernelModules = [ "kvm-intel" ];
+    #kernelPackages = pkgs.linuxPackages_5_10;
     blacklistedKernelModules = [ "i915" "intel_agp" ];
   };
 
@@ -73,7 +77,20 @@
 
     dpi = 72;
   };
+
+  security.rtkit.enable = true;
+  services.pipewire = {
+    enable = true;
+    alsa = {
+      enable = true;
+      support32Bit = true;
+    };
+    pulse = {
+      enable = true;
+    };
+  };
+
   hardware.opengl.driSupport32Bit = true;
-  hardware.pulseaudio.support32Bit = true;
-  fonts.fontconfig.dpi = 96;
+  #hardware.pulseaudio.support32Bit = true;
+  #fonts.fontconfig.dpi = 96;
 }

@@ -20,8 +20,16 @@
   ];
 
   security.wrappers = {
-    pmount.source = "${pkgs.pmount.out}/bin/pmount";
-    pumount.source = "${pkgs.pmount.out}/bin/pumount";
+    pmount = {
+      source = "${pkgs.pmount.out}/bin/pmount";
+      owner = "root";
+      group = "root";
+    };
+    pumount = {
+      source = "${pkgs.pmount.out}/bin/pumount";
+      owner = "root";
+      group = "root";
+    };
   };
 }
 

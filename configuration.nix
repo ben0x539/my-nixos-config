@@ -70,16 +70,28 @@
       enable = true;
       nssmdns = true;
     };
+    #xserver.wacom.enable = true;
 
     #WARNING: Error retrieving accessibility bus address: org.freedesktop.DBus.Error.ServiceUnknown: The name org.a11y.Bus was not provided by any .service files
     gnome.at-spi2-core.enable = true;
 
-    kbfs.enable = true;
+    blueman.enable = true;
+
+    #kubernetes = {
+    #  roles = [ "master" "node" ];
+    #  masterAddress = "localhost";
+    #  kubelet.extraOpts = "--fail-swap-on=false";
+    #};
   };
 
   nix = {
     useSandbox = true;
     maxJobs = 2;
+
+    package = pkgs.nixUnstable;
+    extraOptions = ''
+      experimental-features = nix-command flakes
+    '';
   };
 
   nixpkgs.config.allowUnfree = true;
@@ -98,20 +110,23 @@
   #services.dockerRegistry.enable = true;
 
   hardware = {
-    pulseaudio = {
+    # pulseaudio = {
+    #   enable = true;
+    #   package = pkgs.pulseaudioFull;
+    #   support32Bit = true;
+    #   # was: load-module module-echo-cancel aec_method=webrtc use_volume_sharing=false
+    #   # but this seems to work btter
+    #   extraConfig = ''
+    #       load-module module-echo-cancel
+    #       load-module module-combine-sink sink_name=tee sink_properties=device.description="Tee"
+    #     '';
+    #   # without this, loading module-echo-cancel crashes the daemon
+    #   daemon.config.flat-volumes = "no";
+    # };
+    bluetooth = {
       enable = true;
-      package = pkgs.pulseaudioFull;
-      support32Bit = true;
-      # was: load-module module-echo-cancel aec_method=webrtc use_volume_sharing=false
-      # but this seems to work btter
-      extraConfig = ''
-          load-module module-echo-cancel
-          load-module module-combine-sink sink_name=tee sink_properties=device.description="Tee"
-        '';
-      # without this, loading module-echo-cancel crashes the daemon
-      daemon.config.flat-volumes = "no";
+      #package = pkgs.bluezFull;
     };
-    bluetooth.enable = true;
   };
 
   programs = {
